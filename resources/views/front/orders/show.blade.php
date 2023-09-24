@@ -28,13 +28,13 @@
             <div style="height: 50vh;width: 100%" id="map"></div>
         </div>
     </section>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap"
+    <script src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap"
         defer></script>
     <script>
         function initMap() {
             const location = {
-                lat: -34.397,
-                lng: 150.644
+                lat:{{$delivery->lat??0}},
+                lng: {{$delivery->lng??0}}
             }
             const map = new google.maps.Map(document.getElementById("map"), {
                 center: location,
