@@ -10,6 +10,7 @@ use App\Http\Controllers\Front\wishListController;
 use App\Http\Controllers\Auth\SocialLoginController;
 use App\Http\Controllers\Payment\PaymentsController;
 use App\Http\Controllers\Front\CurrencyConverterController;
+use App\Http\Controllers\Front\OrdersController;
 use App\Http\Controllers\Front\TwoFactorAuthenticationController;
 
 /*
@@ -51,5 +52,6 @@ Route::middleware(['auth','verified'])->group(function () {
 });
 Route::get('auth/{provider}/redirect',[SocialLoginController::class,'redirect'])->name('auth.socialite.redirect');
 Route::get('auth/{provider}/callback',[SocialLoginController::class,'callback'])->name('auth.socialite.callback');
+Route::get('orders/{order}',[OrdersController::class,'show'])->name('orders.show');
 
 // require __DIR__.'/auth.php';

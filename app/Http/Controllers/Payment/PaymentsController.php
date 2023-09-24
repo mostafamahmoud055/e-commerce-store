@@ -6,6 +6,7 @@ use App\Models\Order;
 use App\Events\OrderCreated;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Delivery;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Redirect;
 
@@ -66,6 +67,11 @@ class PaymentsController extends Controller
             "integration_id" => 4069852,
             "lock_order_when_paid" => "false"
         ];
+        event(new OrderCreated($this->number)); 
+      
+        Delivery::create([
+            'order_id'=>$this->order[0]->id
+        ]);
         $response = Http::post('https://accept.paymob.com/api/acceptance/payment_keys', $billingData);
         return $response->object();
     }
@@ -107,7 +113,7 @@ class PaymentsController extends Controller
         $hashed = hash_hmac('sha512', $connectedString, $secret);
 
         if ($hashed == $hmac) {
-            event(new OrderCreated($this->number)); 
+            // event(new OrderCreated($this->number)); 
             return redirect()->route('home')
             ->with('order-success', "order is created successfully!");
         }

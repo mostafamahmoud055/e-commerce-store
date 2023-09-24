@@ -17,7 +17,8 @@
     <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/A.main.css.pagespeed.cf.wZnWV-GMUP.css') }}">
     @stack('styles')
-
+    {{-- <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    @vite('resources/js/map.ts') --}}
 </head>
 
 <body>

@@ -27,10 +27,10 @@ class DeductProductQuantity
         $orders = $event->orders;
         foreach ($orders as $order) {
             foreach ($order->products as $product) {
-                // Product::where('id', $item->product_id)
-                //     ->update([
-                //         'quantity' => DB::raw("quantity - $item->quantity") //  'quantity - 1' is string so use DB::raw()
-                //     ]);
+                Product::where('id', $product->product_id)
+                    ->update([
+                        'quantity' => DB::raw("quantity - $product->quantity") //  'quantity - 1' is string so use DB::raw()
+                    ]);
                 $product->decrement('quantity', $product->pivot->quantity);
             }
         }
