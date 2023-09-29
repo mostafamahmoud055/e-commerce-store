@@ -28,25 +28,20 @@
             <div style="height: 50vh;width: 100%" id="map"></div>
         </div>
     </section>
-
-    <script src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap" defer></script>
-    <script>
-        let map, marker;
-        let orderId = {{$order->id}}
-    </script>
-    @vite('resources/js/app.js')
+    <script src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap"
+        defer></script>
     <script>
         function initMap() {
-            loc = {
-                lat: {{$delivery->lat}},
-                lng: {{$delivery->lng}}
+            const location = {
+                lat:{{$delivery->lat??0}},
+                lng: {{$delivery->lng??0}}
             }
-            map = new google.maps.Map(document.getElementById("map"), {
-                center: loc,
+            const map = new google.maps.Map(document.getElementById("map"), {
+                center: location,
                 zoom: 15,
             });
-            marker = new google.maps.Marker({
-                position: loc,
+            const marker = new google.maps.Marker({
+                position: location,
                 map: map,
             });
         }
