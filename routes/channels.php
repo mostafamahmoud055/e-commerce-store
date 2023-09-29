@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Order;
 use Illuminate\Support\Facades\Broadcast;
 
 /*
@@ -11,8 +12,13 @@ use Illuminate\Support\Facades\Broadcast;
 | application supports. The given channel authorization callbacks are
 | used to check if an authenticated user can listen to the channel.
 |
-*/
+ */
 
 Broadcast::channel('App.Models.Admin.{id}', function ($admin, $id) {
     return (int) $admin->id === (int) $id;
+});
+
+Broadcast::channel('deliveries.{order_id}', function ($user, $order_id) {
+    $order = Order::findOrFail($order_id);
+    return (int) $order->user_id === (int) $user->id;
 });
